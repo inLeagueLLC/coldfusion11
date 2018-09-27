@@ -28,7 +28,7 @@ RUN apt-get update && \
 COPY ./build/silent.properties $TEMP_BUILD_DIR
 
 # Run ACF11 installer and delete the installer
-RUN  chmod +x ./ColdFusion_11_WWEJ_linux64_011315.bin && \
+RUN chmod +x ./ColdFusion_11_WWEJ_linux64_011315.bin && \
 	./ColdFusion_11_WWEJ_linux64_011315.bin LAX_VM ${JAVA_HOME}/bin/java -f silent.properties && \
 	rm -rf $TEMP_BUILD_DIR
 

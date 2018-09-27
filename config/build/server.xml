@@ -128,12 +128,9 @@
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="false">
 
-      <Valve
-      className="mod_cfml.core"
-      loggingEnabled="false"
-      maxContexts="100"
-      timeBetweenContexts="0"
-      scanClassPaths="false"/>
+        <!-- add pattern="" because without it Adobe will crash on startup -->
+        <Valve className="mod_cfml.core" loggingEnabled="false" maxContexts="100" timeBetweenContexts="0" scanClassPaths="false" pattern="" />
+  
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->
         <!--
@@ -151,7 +148,7 @@
         <!-- To add virtual directory use aliases attribute .The list of aliases should be of the form 
         "/aliasPath1=docBase1,/aliasPath2=docBase2" where aliasPathN must include a leading '/' and 
         docBaseN must be an absolute path to a directory. -->
-        <Context path="/" docBase="/var/www" WorkDir="/opt/coldfusion11/cfusion/runtime/conf/Catalina/localhost/tmp" aliases="/CFIDE=/opt/coldfusion11/cfusion/wwwroot/CFIDE,/WEB-INF=/opt/coldfusion11/cfusion/wwwroot/WEB-INF" ></Context>  
+        <Context path="/" docBase="/var/www" WorkDir="/opt/coldfusion11/cfusion/runtime/conf/Catalina/localhost/tmp" aliases="/CFIDE=/opt/coldfusion11/cfusion/wwwroot/CFIDE,/WEB-INF=/opt/coldfusion11/cfusion/wwwroot/WEB-INF"> </Context>  
 
       </Host>
     </Engine>
