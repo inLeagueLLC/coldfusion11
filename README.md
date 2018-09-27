@@ -13,6 +13,19 @@
 
 The JVM config uses two options designed for containers (**-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap**) rather than fixed heap sizes. By default, they will use all of the memory and CPU allocated to the container. This has not been tested specifically for CF in a production environment. This section will be updated as we discover or get reports on real-world usage.
 
+## Document Root / Reverse Proxy Setup
+
+This image is somewhat prescriptive in how it expects incoming requests to the CF engine. There are two connectors defined in Tomcat's **server.xml**:
+
+* (Port 8500) The standard HTTP Tomcat connector (aka Coldfusion's "internal webserver")
+* (Port 8014) The standard AJP Tomcat connector
+
+In a containerized deployment, a reverse proxy to port 8500 is likely to be much easier to work with than AJP connectors.
+
+The document root (configured in **server.xml**) is the **/var/www** directory, with a virtual aliases for **/CFIDE** and **/WEB-INF**.  The [mod_cfml](https://viviotech.github.io/mod_cfml/index.html) valve is also configured to dynamically generate web contexts based on the **X-Tomcat-DocRoot** header. 
+
+These connectors and mod_cfml can be reconfigured by replacing the server.xml, either as part of deployment or in extending the image.
+
 ## How To Use This Image or Build Your Own
 
 This image exposes the CF engine on port 8500 via HTTP. It is designed to be use with a reverse proxy rather than an AJP connector, but the images could easily be re-built 

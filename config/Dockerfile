@@ -43,7 +43,12 @@ COPY cf-docker.sh /opt/coldfusion11/
 # Install ACF11 Hotfix and then delete it and the ACF11 bundled JRE
 RUN java -jar /opt/coldfusion11/jre/bin/hotfix_015.jar -i silent -f /opt/coldfusion11/jre/bin/hotfix.properties && \
 	rm -rf /opt/coldfusion11/jre/* && \
-	chmod +x /opt/coldfusion11/cf-docker.sh
+	chmod +x /opt/coldfusion11/cf-docker.sh && \
+	mkdir /var/www
+
+# Install mod_cfml and server.xml default to use it and move the docRoot to /var/www
+ADD https://github.com/viviotech/mod_cfml/blob/master/java/mod_cfml-valve_v1.1.05.jar?raw=true /opt/coldfusion11/cfusion/runtime/lib
+COPY ./build/server.xml /opt/coldfusion11/cfusion/runtime/conf/
 
 # Install Commandbox and CFConfig
 
