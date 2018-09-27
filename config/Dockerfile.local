@@ -17,7 +17,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 WORKDIR $TEMP_BUILD_DIR
 
-ADD https://coldfusion.nyc3.digitaloceanspaces.com/ColdFusion_11_WWEJ_linux64_011315.bin $TEMP_BUILD_DIR
+COPY ./build-local/ColdFusion_11_WWEJ_linux64_011315.bin $TEMP_BUILD_DIR
 
 RUN apt-get update && \
 	apt-get install -y tzdata nano unzip curl libstdc++5 openjdk-8-jdk && \
@@ -34,11 +34,11 @@ RUN  chmod +x ./ColdFusion_11_WWEJ_linux64_011315.bin && \
 
 # Download ACF Hotfix, copy hotfix.properties and ACF11 runtime files
 
-ADD https://coldfusion.nyc3.digitaloceanspaces.com/hotfix_015.jar /opt/coldfusion11/jre/bin
+COPY cf-docker.sh /opt/coldfusion11/
+COPY ./build-local/hotfix_015.jar /opt/coldfusion11/jre/bin/
 COPY ./hotfix/ /opt/coldfusion11/jre/bin/
 COPY ./build/neo-runtime.xml /opt/coldfusion11/cfusion/lib/
 COPY ./build/jvm.config /opt/coldfusion11/cfusion/bin/
-COPY cf-docker.sh /opt/coldfusion11/
 
 # Install ACF11 Hotfix and then delete it and the ACF11 bundled JRE
 RUN java -jar /opt/coldfusion11/jre/bin/hotfix_015.jar -i silent -f /opt/coldfusion11/jre/bin/hotfix.properties && \
