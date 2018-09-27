@@ -2,7 +2,7 @@ version: '3.7'
 
 services:    
   coldfusion11:
-    image: inleague/coldfusion11:hf15
+    image: inleague/coldfusion11
     build: 
       context: ./config/
       labels:
