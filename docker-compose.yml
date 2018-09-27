@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:    
+  coldfusion11:
+    image: inleague/coldfusion11:hf15
+    build: 
+      context: ./config/
+      labels:
+        version: 2018.09.26
+    container_name: coldfusion11
+    ports:
+      - 8500:8500 

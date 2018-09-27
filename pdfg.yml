@@ -1,0 +1,12 @@
+version: '3.7'  # if no version is specificed then v1 is assumed. Recommend v2 minimum
+
+services:    
+  pdfg-base:
+    image: inleague/coldfusion_pdfg:acf11
+    build:
+      context: ./config/
+      dockerfile: Dockerfile.pdfg
+      labels:
+        version: 2018.09.26
+    ports:
+      - 8987:8987
