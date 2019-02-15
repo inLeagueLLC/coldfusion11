@@ -1,5 +1,11 @@
 # Unofficial Docker Images for Adobe Coldfusion 11
 
+## Project Abandoned
+
+As of February 2019, this project has been abandoned. With ACF11 going EOL in April, there's really no reason for it to stick around. The build will fail because the installer and hotfix are no longer hosted by the authors, but if you can get the Linux installer and a hotfix .jar you can sub them in without too much effort.
+
+But you shouldn't.
+
 ## Images
 
 * Adobe Coldfusion 11 Hotfix 15 (no add-ons): [Docker Hub](https://hub.docker.com/r/inleague/coldfusion11) (:latest / :hf15)
